@@ -104,9 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var doc = context.document;
-  var pages = doc.pages();
   var AllTextStyles = doc.documentData().layerTextStyles().sharedStyles();
-  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, AllTextStyles, false);
+  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(doc.currentPage(), AllTextStyles, false);
 });
 
 /***/ }),
@@ -124,7 +123,6 @@ __webpack_require__.r(__webpack_exports__);
 function getTextLayers(target) {
   var textLayers = [],
       parent = target.children();
-  log(target.children());
   parent.forEach(function (item) {
     if (item.class() === MSTextLayer) {
       textLayers.push(item);
@@ -133,13 +131,8 @@ function getTextLayers(target) {
   return textLayers;
 }
 
-function rename(pages, AllTextStyles, prepend) {
-  var textLayers;
-
-  for (var i = 0; i < pages.count(); i++) {
-    textLayers = getTextLayers(pages[i]);
-  }
-
+function rename(page, AllTextStyles, prepend) {
+  var textLayers = getTextLayers(page);
   textLayers.forEach(function (item) {
     var currentName = item.name();
     var textLayerStyle = item.style();

@@ -12,12 +12,9 @@ function getTextLayers(target){
     return textLayers
 }
 
-export function rename(pages, AllTextStyles, prepend) {
+export function rename(page, AllTextStyles, prepend) {
 
-  let textLayers;
-  for (var i = 0; i < pages.count(); i++){
-    textLayers = getTextLayers(pages[i])
-  }
+  let textLayers=getTextLayers(page)
 
   textLayers.forEach(item=>{
   
