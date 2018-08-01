@@ -22,6 +22,7 @@
     ]
   },
   "version": "1.0.1",
+  "description": "Renames text layers in the current page based on their text style name",
   "name": "rename-layers-based-on-textstyle",
   "identifier": "rename-layers-based-on-textstyle",
   "disableCocoaScriptPreprocessor": true,

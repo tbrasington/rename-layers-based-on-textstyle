@@ -1,5 +1,6 @@
 {
   "name": "rename-layers-based-on-textstyle",
+  "description": "Renames text layers in the current page based on their text style name",
   "version": "1.0.1",
   "engines": {
     "sketch": ">=3.0"
