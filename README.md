@@ -2,9 +2,7 @@
 
 # rename-layers-based-on-textstyle
 
-
 ## What
-
 This plugin will go through your document's text styles and prepend or replace their Text Style name to the layer. 
 
 ## Why?
