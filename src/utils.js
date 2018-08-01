@@ -7,7 +7,7 @@ function getTextLayers(target){
       if(item.class()===MSTextLayer) {
         textLayers.push(item);
       }
-    })
+    });
   
     return textLayers
 }
@@ -20,12 +20,13 @@ export function rename(pages, AllTextStyles, prepend) {
   }
 
   textLayers.forEach(item=>{
+  
     let currentName = item.name();
     let textLayerStyle = item.style(); 
     let sharedID = textLayerStyle.sharedObjectID()
     let styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
     let MatchedStyleName = AllTextStyles.filteredArrayUsingPredicate(styleSearch);
-    if(MatchedStyleName){
+    if(MatchedStyleName.length){
         if(prepend) {
             item.setName(MatchedStyleName[0].name() +   ' - ' + currentName); 
         }  else { 

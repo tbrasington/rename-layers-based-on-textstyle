@@ -124,6 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 function getTextLayers(target) {
   var textLayers = [],
       parent = target.children();
+  log(target.children());
   parent.forEach(function (item) {
     if (item.class() === MSTextLayer) {
       textLayers.push(item);
@@ -146,7 +147,7 @@ function rename(pages, AllTextStyles, prepend) {
     var styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
     var MatchedStyleName = AllTextStyles.filteredArrayUsingPredicate(styleSearch);
 
-    if (MatchedStyleName) {
+    if (MatchedStyleName.length) {
       if (prepend) {
         item.setName(MatchedStyleName[0].name() + ' - ' + currentName);
       } else {
