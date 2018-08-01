@@ -1,6 +1,6 @@
 # rename-layers-based-on-textstyle
 
-![logo](artwork/icon.png)
+![logo](assets/icon.png)
 
 ## What
 This plugin will go through your document's text styles and prepend or replace their Text Style name to the layer. 
@@ -15,7 +15,7 @@ When developers are picking through tools like InVision and Zeplin they can't ea
 Takes the Text Syle name and adds it to the front of the the Layer name with a hypen
 
 ### Replace
-![logo](assets/replace.gif)
+![logo](artwork/replace.gif)
 Takes the Text Syle name and replaces the entire layer name with the Text Style
 
 
