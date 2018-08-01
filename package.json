@@ -1,0 +1,25 @@
+{
+  "name": "rename-layers-based-on-textstyle",
+  "version": "1.0.0",
+  "engines": {
+    "sketch": ">=3.0"
+  },
+  "skpm": {
+    "name": "rename-layers-based-on-textstyle",
+    "manifest": "src/manifest.json",
+    "main": "rename-layers-based-on-textstyle.sketchplugin",
+    "assets": [
+      "assets/**/*"
+    ]
+  },
+  "scripts": {
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "start": "skpm-build --watch --run",
+    "postinstall": "npm run build && skpm-link"
+  },
+  "devDependencies": {
+    "@skpm/builder": "^0.5.2"
+  },
+  "author": "Thomas Brasington <mail@tbrasington.com>"
+}

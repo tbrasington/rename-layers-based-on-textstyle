@@ -1,0 +1,24 @@
+{
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "Prepend",
+      "identifier": "prepend-identifier",
+      "script": "./prepend.js"
+    },
+    {
+      "name": "Replace",
+      "identifier": "replace-identifier",
+      "script": "./replace.js"
+    }
+  ],
+  "menu": {
+    "title": "Rename text layers from Text Style",
+    "items": [
+      "prepend-identifier",
+      "replace-identifier"
+    ]
+  }
+}
