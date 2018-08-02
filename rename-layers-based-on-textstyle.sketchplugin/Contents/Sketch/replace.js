@@ -104,8 +104,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var doc = context.document;
+  var pages = doc.pages();
   var AllTextStyles = doc.documentData().layerTextStyles().sharedStyles();
-  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(doc.currentPage(), AllTextStyles, false);
+  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, AllTextStyles, false);
 });
 
 /***/ }),
@@ -120,32 +121,38 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rename", function() { return rename; });
-function getTextLayers(target) {
-  var textLayers = [],
-      parent = target.children();
-  parent.forEach(function (item) {
-    if (item.class() === MSTextLayer) {
-      textLayers.push(item);
-    }
+function rename(pages, AllTextStyles, prepend) {
+  pages.forEach(function (page) {
+    page.artboards().forEach(function (artboard) {
+      recursiveRename(artboard.layers(), AllTextStyles, prepend);
+    });
   });
-  return textLayers;
 }
 
-function rename(page, AllTextStyles, prepend) {
-  var textLayers = getTextLayers(page);
-  textLayers.forEach(function (item) {
-    var currentName = item.name();
-    var textLayerStyle = item.style();
+function recursiveRename(layers, AllTextStyles, prepend) {
+  getTextLayers(layers, function (layer) {
+    var currentName = layer.name();
+    var textLayerStyle = layer.style();
     var sharedID = textLayerStyle.sharedObjectID();
     var styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
     var MatchedStyleName = AllTextStyles.filteredArrayUsingPredicate(styleSearch);
 
     if (MatchedStyleName.length) {
       if (prepend) {
-        item.setName(MatchedStyleName[0].name() + ' - ' + currentName);
+        layer.setName(MatchedStyleName[0].name() + ' - ' + currentName);
       } else {
-        item.setName(MatchedStyleName[0].name());
+        layer.setName(MatchedStyleName[0].name());
       }
+    }
+  });
+}
+
+function getTextLayers(layers, callback) {
+  layers.forEach(function (layer) {
+    if (layer.class() === MSLayerGroup) {
+      getTextLayers(layer.layers(), callback);
+    } else if (layer.class() === MSTextLayer) {
+      callback(layer);
     }
   });
 }

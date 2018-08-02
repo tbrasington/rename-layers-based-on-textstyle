@@ -13,7 +13,9 @@ When developers are picking through tools like InVision and Zeplin they can't ea
 
 ## Installation
 
-Download this repository as a .zip and then double click / open with Sketch "rename-layers-based-on-textstyle.sketchplugin"
+1. Download the [rename-layers-based-on-textstyle.zip](https://github.com/tbrasington/rename-layers-based-on-textstyle/raw/master/rename-layers-based-on-textstyle.zip)
+2. Unzip
+3. Double Click on `rename-layers-based-on-textstyle.sketchplugin` 
 
 ## Commands
 
