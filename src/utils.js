@@ -4,7 +4,8 @@ export function rename(pages, AllTextStyles, prepend) {
     page.artboards().forEach(artboard => {
       recursiveRename(artboard.layers(),AllTextStyles, prepend)
     })
-  })
+  });
+  
  }
 
 function recursiveRename(layers,AllTextStyles, prepend) {
