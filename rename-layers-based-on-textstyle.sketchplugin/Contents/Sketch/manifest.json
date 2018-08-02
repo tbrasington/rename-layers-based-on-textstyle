@@ -4,6 +4,11 @@
   "icon": "icon.png",
   "commands": [
     {
+      "name": "Append",
+      "identifier": "append-identifier",
+      "script": "append.js"
+    },
+    {
       "name": "Prepend",
       "identifier": "prepend-identifier",
       "script": "prepend.js"
@@ -17,11 +22,12 @@
   "menu": {
     "title": "Rename text layers from Text Style",
     "items": [
+      "append-identifier",
       "prepend-identifier",
       "replace-identifier"
     ]
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Renames text layers in the current page based on their text style name",
   "name": "rename-layers-based-on-textstyle",
   "identifier": "rename-layers-based-on-textstyle",

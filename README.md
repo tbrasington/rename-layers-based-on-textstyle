@@ -19,6 +19,12 @@ When developers are picking through tools like InVision and Zeplin they can't ea
 
 ## Commands
 
+### Append
+
+![logo](artwork/append.gif)
+
+Takes the Text Syle name and adds it to the end of the the Layer name with a hypen
+
 ### Prepend
 
 ![logo](artwork/prepend.gif)

@@ -129,7 +129,7 @@ function rename(pages, AllTextStyles, prepend) {
   });
 }
 
-function recursiveRename(layers, AllTextStyles, prepend) {
+function recursiveRename(layers, AllTextStyles, action) {
   getTextLayers(layers, function (layer) {
     var currentName = layer.name();
     var textLayerStyle = layer.style();
@@ -138,8 +138,10 @@ function recursiveRename(layers, AllTextStyles, prepend) {
     var MatchedStyleName = AllTextStyles.filteredArrayUsingPredicate(styleSearch);
 
     if (MatchedStyleName.length) {
-      if (prepend) {
+      if (action === "prepend") {
         layer.setName(MatchedStyleName[0].name() + ' - ' + currentName);
+      } else if (action === "append") {
+        layer.setName(currentName + ' - ' + MatchedStyleName[0].name());
       } else {
         layer.setName(MatchedStyleName[0].name());
       }

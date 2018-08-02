@@ -6,5 +6,5 @@ export default function(context) {
   const pages = doc.pages()
   const AllTextStyles = doc.documentData().layerTextStyles().sharedStyles();
 
-  rename(pages, AllTextStyles, "replace");
+  rename(pages, AllTextStyles, "append");
 }

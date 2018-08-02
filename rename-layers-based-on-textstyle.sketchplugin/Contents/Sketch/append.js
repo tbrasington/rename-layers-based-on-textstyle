@@ -86,15 +86,15 @@ var exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/replace.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/append.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/replace.js":
-/*!************************!*\
-  !*** ./src/replace.js ***!
-  \************************/
+/***/ "./src/append.js":
+/*!***********************!*\
+  !*** ./src/append.js ***!
+  \***********************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
   var doc = context.document;
   var pages = doc.pages();
   var AllTextStyles = doc.documentData().layerTextStyles().sharedStyles();
-  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, AllTextStyles, "replace");
+  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, AllTextStyles, "append");
 });
 
 /***/ }),
@@ -170,4 +170,4 @@ function getTextLayers(layers, callback) {
 }
 that['onRun'] = __skpm_run.bind(this, 'default')
 
-//# sourceMappingURL=replace.js.map
+//# sourceMappingURL=append.js.map
