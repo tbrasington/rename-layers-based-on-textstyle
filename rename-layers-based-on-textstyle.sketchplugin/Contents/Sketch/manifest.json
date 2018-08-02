@@ -7,11 +7,6 @@
       "name": "Prepend",
       "identifier": "prepend-identifier",
       "script": "prepend.js"
-    },
-    {
-      "name": "Replace",
-      "identifier": "replace-identifier",
-      "script": "replace.js"
     }
   ],
   "menu": {
