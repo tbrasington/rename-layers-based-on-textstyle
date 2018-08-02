@@ -5,12 +5,11 @@ export function rename(pages, AllTextStyles, prepend) {
       recursiveRename(artboard.layers(),AllTextStyles, prepend)
     })
   });
-  
  }
 
 function recursiveRename(layers,AllTextStyles, prepend) {
   
-  process(layers, function(layer){
+  getTextLayers(layers, function(layer){
     
     let currentName = layer.name();
     let textLayerStyle = layer.style(); 
@@ -27,12 +26,12 @@ function recursiveRename(layers,AllTextStyles, prepend) {
   })
 }
 
-function process(layers,callback) {
+function getTextLayers(layers,callback) {
 
   layers.forEach(layer=>{
-    if (layer.class() == "MSLayerGroup") {
-      process(layer.layers(), callback);
-    } else if (layer.class() == "MSTextLayer") {
+    if (layer.class() === MSLayerGroup) {
+      getTextLayers(layer.layers(), callback);
+    } else if (layer.class() === MSTextLayer) {
       callback(layer);
     }
   });

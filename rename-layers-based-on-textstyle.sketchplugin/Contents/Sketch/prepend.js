@@ -130,7 +130,7 @@ function rename(pages, AllTextStyles, prepend) {
 }
 
 function recursiveRename(layers, AllTextStyles, prepend) {
-  process(layers, function (layer) {
+  getTextLayers(layers, function (layer) {
     var currentName = layer.name();
     var textLayerStyle = layer.style();
     var sharedID = textLayerStyle.sharedObjectID();
@@ -147,11 +147,11 @@ function recursiveRename(layers, AllTextStyles, prepend) {
   });
 }
 
-function process(layers, callback) {
+function getTextLayers(layers, callback) {
   layers.forEach(function (layer) {
-    if (layer.class() == "MSLayerGroup") {
-      process(layer.layers(), callback);
-    } else if (layer.class() == "MSTextLayer") {
+    if (layer.class() === MSLayerGroup) {
+      getTextLayers(layer.layers(), callback);
+    } else if (layer.class() === MSTextLayer) {
       callback(layer);
     }
   });
