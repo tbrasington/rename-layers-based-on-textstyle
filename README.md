@@ -7,6 +7,8 @@
 
 This plugin will go through your current pages' text styles and prepend or replace their Text Style name to the layer. 
 
+It will go through your local document text styles first, then look for any text styles that are linked from your libraries.
+
 ## Why?
 
 When developers are picking through tools like InVision and Zeplin they can't easily sync up the style reference to your design system. They only get the attributes of the font. This tool means that they can easily see form the generated class names or layer what the style is.
