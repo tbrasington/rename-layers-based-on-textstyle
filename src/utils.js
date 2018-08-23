@@ -29,19 +29,18 @@ function recursiveRename(layers,LocalTextStyles,LibraryStyles, action) {
 
      Object.keys(LibraryStyles).forEach(item=>{
       if(String(item)===String(sharedID)){
-        newName = LibraryStyles[item].name 
+       newName = LibraryStyles[item].name 
       }
     });
     
-    if(newName.length){
-        if(action==="prepend") {
+         if(action==="prepend") {
           layer.setName(newName +   ' - ' + currentName); 
         } else if (action==="append") {
           layer.setName(currentName + ' - ' + newName ); 
         } else { 
           layer.setName(newName);
       }
-    }
+    
    
   })
 }

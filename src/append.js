@@ -9,10 +9,20 @@ export default function(context) {
 
   // map library styles to an object for cross references
   let LibraryStyles = {}
-  AppController.sharedInstance().librariesController().userLibraries()[10].document().documentData().layerTextStyles().sharedStyles().forEach(item=>{
-    LibraryStyles[item.objectID()]= { name : item.name() } 
-  });
+  // AppController.sharedInstance().librariesController().userLibraries()[10].document().documentData().layerTextStyles().sharedStyles().forEach(item=>{
+  //   LibraryStyles[item.objectID()]= { name : item.name() } 
+  // });
+  AppController.sharedInstance().librariesController().userLibraries().forEach(library=>{
+    
+    console.log(library.document())
+    if(library.document()!==null) {
+      library.document().documentData().layerTextStyles().sharedStyles().forEach(item=>{
+        LibraryStyles[item.objectID()]= { name : item.name() } 
+      })
+    }
+});
  
+
   // get the library styles within this document
  let DocumentStylesFromLibrary = {}
   context.document.documentData().foreignTextStyles().forEach(style => {

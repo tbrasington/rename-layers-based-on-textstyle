@@ -110,11 +110,20 @@ __webpack_require__.r(__webpack_exports__);
   var pages = doc.pages();
   var LocalTextStyles = doc.documentData().layerTextStyles().sharedStyles(); // map library styles to an object for cross references
 
-  var LibraryStyles = {};
-  AppController.sharedInstance().librariesController().userLibraries()[10].document().documentData().layerTextStyles().sharedStyles().forEach(function (item) {
-    LibraryStyles[item.objectID()] = {
-      name: item.name()
-    };
+  var LibraryStyles = {}; // AppController.sharedInstance().librariesController().userLibraries()[10].document().documentData().layerTextStyles().sharedStyles().forEach(item=>{
+  //   LibraryStyles[item.objectID()]= { name : item.name() } 
+  // });
+
+  AppController.sharedInstance().librariesController().userLibraries().forEach(function (library) {
+    console.log(library.document());
+
+    if (library.document() !== null) {
+      library.document().documentData().layerTextStyles().sharedStyles().forEach(function (item) {
+        LibraryStyles[item.objectID()] = {
+          name: item.name()
+        };
+      });
+    }
   }); // get the library styles within this document
 
   var DocumentStylesFromLibrary = {};
@@ -172,14 +181,12 @@ function recursiveRename(layers, LocalTextStyles, LibraryStyles, action) {
       }
     });
 
-    if (newName.length) {
-      if (action === "prepend") {
-        layer.setName(newName + ' - ' + currentName);
-      } else if (action === "append") {
-        layer.setName(currentName + ' - ' + newName);
-      } else {
-        layer.setName(newName);
-      }
+    if (action === "prepend") {
+      layer.setName(newName + ' - ' + currentName);
+    } else if (action === "append") {
+      layer.setName(currentName + ' - ' + newName);
+    } else {
+      layer.setName(newName);
     }
   });
 }
