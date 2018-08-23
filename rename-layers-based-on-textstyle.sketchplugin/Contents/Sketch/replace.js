@@ -133,6 +133,7 @@ function recursiveRename(layers, AllTextStyles, action) {
   getTextLayers(layers, function (layer) {
     var currentName = layer.name();
     var textLayerStyle = layer.style();
+    log(textLayerStyle);
     var sharedID = textLayerStyle.sharedObjectID();
     var styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
     var MatchedStyleName = AllTextStyles.filteredArrayUsingPredicate(styleSearch);

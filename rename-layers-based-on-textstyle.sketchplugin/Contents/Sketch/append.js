@@ -100,13 +100,34 @@ var exports =
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+/* harmony import */ var sketch_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch/dom */ "sketch/dom");
+/* harmony import */ var sketch_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_dom__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var doc = context.document;
   var pages = doc.pages();
-  var AllTextStyles = doc.documentData().layerTextStyles().sharedStyles();
-  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, AllTextStyles, "append");
+  var LocalTextStyles = doc.documentData().layerTextStyles().sharedStyles(); // map library styles to an object for cross references
+
+  var LibraryStyles = {};
+  AppController.sharedInstance().librariesController().userLibraries()[10].document().documentData().layerTextStyles().sharedStyles().forEach(function (item) {
+    LibraryStyles[item.objectID()] = {
+      name: item.name()
+    };
+  }); // get the library styles within this document
+
+  var DocumentStylesFromLibrary = {};
+  context.document.documentData().foreignTextStyles().forEach(function (style) {
+    //log('local id '  + style.localShareID()) // this is what the text style in an artboard will report
+    //log('remote id '  +style.remoteShareID()) // this syncs to whats in the library
+    DocumentStylesFromLibrary[style.localShareID()] = {
+      localID: style.localShareID(),
+      libraryID: style.remoteShareID(),
+      name: LibraryStyles[style.remoteShareID()] ? LibraryStyles[style.remoteShareID()].name : 'No matched library style'
+    };
+  });
+  Object(_utils__WEBPACK_IMPORTED_MODULE_1__["rename"])(pages, LocalTextStyles, DocumentStylesFromLibrary, "append");
 });
 
 /***/ }),
@@ -121,29 +142,43 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rename", function() { return rename; });
-function rename(pages, AllTextStyles, prepend) {
+function rename(pages, LocalTextStyles, LibraryStyles, prepend) {
   pages.forEach(function (page) {
     page.artboards().forEach(function (artboard) {
-      recursiveRename(artboard.layers(), AllTextStyles, prepend);
+      recursiveRename(artboard.layers(), LocalTextStyles, LibraryStyles, prepend);
     });
   });
 }
 
-function recursiveRename(layers, AllTextStyles, action) {
+function recursiveRename(layers, LocalTextStyles, LibraryStyles, action) {
   getTextLayers(layers, function (layer) {
     var currentName = layer.name();
-    var textLayerStyle = layer.style();
-    var sharedID = textLayerStyle.sharedObjectID();
+    var textLayerStyle = layer.style(); //log('layer id ' + textLayerStyle.sharedObjectID())
+
+    var sharedID = textLayerStyle.sharedObjectID(); // local document first
+
     var styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
-    var MatchedStyleName = AllTextStyles.filteredArrayUsingPredicate(styleSearch);
+    var MatchedStyleName = LocalTextStyles.filteredArrayUsingPredicate(styleSearch); // check libraries next
+
+    var newName = '';
 
     if (MatchedStyleName.length) {
+      newName = MatchedStyleName[0].name();
+    }
+
+    Object.keys(LibraryStyles).forEach(function (item) {
+      if (String(item) === String(sharedID)) {
+        newName = LibraryStyles[item].name;
+      }
+    });
+
+    if (newName.length) {
       if (action === "prepend") {
-        layer.setName(MatchedStyleName[0].name() + ' - ' + currentName);
+        layer.setName(newName + ' - ' + currentName);
       } else if (action === "append") {
-        layer.setName(currentName + ' - ' + MatchedStyleName[0].name());
+        layer.setName(currentName + ' - ' + newName);
       } else {
-        layer.setName(MatchedStyleName[0].name());
+        layer.setName(newName);
       }
     }
   });
@@ -158,6 +193,17 @@ function getTextLayers(layers, callback) {
     }
   });
 }
+
+/***/ }),
+
+/***/ "sketch/dom":
+/*!*****************************!*\
+  !*** external "sketch/dom" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch/dom");
 
 /***/ })
 
