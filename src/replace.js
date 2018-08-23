@@ -1,10 +1,12 @@
-import {rename}  from './utils'
+import {rename,getLibraryStyles}  from './utils'
 
 export default function(context) {
 
   const doc = context.document;
   const pages = doc.pages()
-  const AllTextStyles = doc.documentData().layerTextStyles().sharedStyles();
 
-  rename(pages, AllTextStyles, "replace");
+  const LocalTextStyles = doc.documentData().layerTextStyles().sharedStyles();
+  const DocumentStylesFromLibrary= getLibraryStyles();
+  
+  rename(pages, LocalTextStyles, DocumentStylesFromLibrary, "replace");
 }

@@ -100,23 +100,33 @@ var exports =
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var sketch_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch/dom */ "sketch/dom");
-/* harmony import */ var sketch_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_dom__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
-
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
 
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var doc = context.document;
   var pages = doc.pages();
-  var LocalTextStyles = doc.documentData().layerTextStyles().sharedStyles(); // map library styles to an object for cross references
+  var LocalTextStyles = doc.documentData().layerTextStyles().sharedStyles();
+  var DocumentStylesFromLibrary = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["getLibraryStyles"])();
+  Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, LocalTextStyles, DocumentStylesFromLibrary, "append");
+});
 
-  var LibraryStyles = {}; // AppController.sharedInstance().librariesController().userLibraries()[10].document().documentData().layerTextStyles().sharedStyles().forEach(item=>{
-  //   LibraryStyles[item.objectID()]= { name : item.name() } 
-  // });
+/***/ }),
 
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/*! exports provided: getLibraryStyles, rename */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLibraryStyles", function() { return getLibraryStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rename", function() { return rename; });
+function getLibraryStyles() {
+  // map library styles to an object for cross references
+  var LibraryStyles = {};
   AppController.sharedInstance().librariesController().userLibraries().forEach(function (library) {
-    console.log(library.document());
-
     if (library.document() !== null) {
       library.document().documentData().layerTextStyles().sharedStyles().forEach(function (item) {
         LibraryStyles[item.objectID()] = {
@@ -136,21 +146,8 @@ __webpack_require__.r(__webpack_exports__);
       name: LibraryStyles[style.remoteShareID()] ? LibraryStyles[style.remoteShareID()].name : 'No matched library style'
     };
   });
-  Object(_utils__WEBPACK_IMPORTED_MODULE_1__["rename"])(pages, LocalTextStyles, DocumentStylesFromLibrary, "append");
-});
-
-/***/ }),
-
-/***/ "./src/utils.js":
-/*!**********************!*\
-  !*** ./src/utils.js ***!
-  \**********************/
-/*! exports provided: rename */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rename", function() { return rename; });
+  return DocumentStylesFromLibrary;
+}
 function rename(pages, LocalTextStyles, LibraryStyles, prepend) {
   pages.forEach(function (page) {
     page.artboards().forEach(function (artboard) {
@@ -200,17 +197,6 @@ function getTextLayers(layers, callback) {
     }
   });
 }
-
-/***/ }),
-
-/***/ "sketch/dom":
-/*!*****************************!*\
-  !*** external "sketch/dom" ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("sketch/dom");
 
 /***/ })
 
