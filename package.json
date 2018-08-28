@@ -1,9 +1,9 @@
 {
   "name": "rename-layers-based-on-textstyle",
   "description": "Renames text layers in the current page based on their text style name",
-  "repository"  : "https://github.com/tbrasington/rename-layers-based-on-textstyle.git",
+  "repository": "https://github.com/tbrasington/rename-layers-based-on-textstyle.git",
   "license": "mit",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "engines": {
     "sketch": ">=3.0"
   },
