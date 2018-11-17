@@ -65,14 +65,16 @@ function recursiveRename(layers,LocalTextStyles,LibraryStyles, action) {
        newName = LibraryStyles[item].name 
       }
     }); 
+
+    if(typeof(newName) === 'object'){
          if(action==="prepend") {
           layer.setName(newName +   ' - ' + currentName); 
         } else if (action==="append") {
           layer.setName(currentName + ' - ' + newName ); 
-        } else { 
+        } else if (action==="replace") { 
           layer.setName(newName);
       }
-    
+    }
    
   })
 }
