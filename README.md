@@ -14,6 +14,10 @@ It will go through your local document text styles first, then look for any text
 When developers are picking through tools like InVision and Zeplin they can't easily sync up the style reference to your design system. They only get the attributes of the font. This tool means that they can easily see form the generated class names or layer what the style is.
 
 ## Installation
+
+[![Install rename-layers-based-on-textstyle with Sketchpacks](http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png "Install rename-layers-based-on-textstyle with Sketchpacks")](https://sketchpacks.com/tbrasington/rename-layers-based-on-textstyle/install)
+
+
 Either install via Sketchpacks, Sketch Runner or...
 
 1. Download from the [release page](https://github.com/tbrasington/rename-layers-based-on-textstyle/releases)
