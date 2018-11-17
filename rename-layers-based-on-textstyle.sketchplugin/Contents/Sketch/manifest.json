@@ -4,35 +4,23 @@
   "icon": "icon.png",
   "commands": [
     {
-      "name": "Append",
-      "identifier": "append-identifier",
-      "script": "append.js"
-    },
-    {
-      "name": "Prepend",
+      "name": "Replace",
       "identifier": "prepend-identifier",
       "script": "prepend.js"
-    },
-    {
-      "name": "Replace",
-      "identifier": "replace-identifier",
-      "script": "replace.js"
     }
   ],
   "menu": {
     "title": "Rename text layers from Text Style",
     "items": [
-      "append-identifier",
-      "prepend-identifier",
-      "replace-identifier"
+      "prepend-identifier"
     ]
   },
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Renames text layers in the current page based on their text style name",
   "name": "rename-layers-based-on-textstyle",
   "identifier": "rename-layers-based-on-textstyle",
   "disableCocoaScriptPreprocessor": true,
-  "appcast": "https://raw.githubusercontent.com//master/.appcast.xml",
+  "appcast": "https://raw.githubusercontent.com/tbrasington/rename-layers-based-on-textstyle/master/.appcast.xml",
   "author": "Thomas Brasington",
   "authorEmail": "mail@tbrasington.com"
 }

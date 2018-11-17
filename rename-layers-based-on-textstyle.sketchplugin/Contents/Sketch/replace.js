@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var doc = context.document;
   var pages = doc.pages();
-  var LocalTextStyles = doc.documentData().layerTextStyles().sharedStyles();
+  var LocalTextStyles = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["mapLocalStyles"])(doc.documentData().layerTextStyles().sharedStyles());
   var DocumentStylesFromLibrary = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["getLibraryStyles"])();
   Object(_utils__WEBPACK_IMPORTED_MODULE_0__["rename"])(pages, LocalTextStyles, DocumentStylesFromLibrary, "replace");
 });
@@ -116,13 +116,25 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/*! exports provided: getLibraryStyles, rename */
+/*! exports provided: mapLocalStyles, getLibraryStyles, rename */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapLocalStyles", function() { return mapLocalStyles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLibraryStyles", function() { return getLibraryStyles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rename", function() { return rename; });
+function mapLocalStyles(styles) {
+  var LocalTextStyles = {}; //doc.documentData().layerTextStyles().sharedStyles() ;
+
+  styles.forEach(function (element) {
+    LocalTextStyles[element.objectID()] = {
+      name: element.name(),
+      style: element
+    };
+  });
+  return LocalTextStyles;
+}
 function getLibraryStyles() {
   // map library styles to an object for cross references
   var LibraryStyles = {};
@@ -158,20 +170,17 @@ function rename(pages, LocalTextStyles, LibraryStyles, prepend) {
 
 function recursiveRename(layers, LocalTextStyles, LibraryStyles, action) {
   getTextLayers(layers, function (layer) {
-    var currentName = layer.name();
-    var textLayerStyle = layer.style(); //log('layer id ' + textLayerStyle.sharedObjectID())
+    var currentName = layer.name(); //let textLayerStyle = layer.style(); 
+    //log('layer id ' + layer + ' ' + textLayerStyle.objectID())
 
-    var sharedID = textLayerStyle.sharedObjectID(); // local document first
-
-    var styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
-    var MatchedStyleName = LocalTextStyles.filteredArrayUsingPredicate(styleSearch); // check libraries next
+    var sharedID = layer.sharedStyleID(); // local document first
 
     var newName = '';
-
-    if (MatchedStyleName.length) {
-      newName = MatchedStyleName[0].name();
-    }
-
+    Object.keys(LocalTextStyles).forEach(function (item) {
+      if (String(item) === String(sharedID)) {
+        newName = LocalTextStyles[item].name;
+      }
+    });
     Object.keys(LibraryStyles).forEach(function (item) {
       if (String(item) === String(sharedID)) {
         newName = LibraryStyles[item].name;

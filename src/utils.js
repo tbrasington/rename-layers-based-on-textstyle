@@ -1,3 +1,13 @@
+export function mapLocalStyles(styles) {
+  let LocalTextStyles = {} //doc.documentData().layerTextStyles().sharedStyles() ;
+  styles.forEach(element => {
+    
+   LocalTextStyles[element.objectID()] = { name : element.name(),  style: element } 
+
+});
+return LocalTextStyles;
+}
+
 export function getLibraryStyles(){
  // map library styles to an object for cross references
  let LibraryStyles = {}
@@ -37,29 +47,24 @@ export function rename(pages, LocalTextStyles,LibraryStyles,   prepend) {
 function recursiveRename(layers,LocalTextStyles,LibraryStyles, action) {
  
   getTextLayers(layers, function(layer){
-
     let currentName = layer.name();
-    let textLayerStyle = layer.style(); 
-    //log('layer id ' + textLayerStyle.sharedObjectID())
-    let sharedID = textLayerStyle.sharedObjectID()
+    //let textLayerStyle = layer.style(); 
+    //log('layer id ' + layer + ' ' + textLayerStyle.objectID())
+    let sharedID = layer.sharedStyleID()
     
     // local document first
-    let styleSearch = NSPredicate.predicateWithFormat("objectID == %@", sharedID);
-    let MatchedStyleName = LocalTextStyles.filteredArrayUsingPredicate(styleSearch);
-
-     // check libraries next
      let newName='';
-
-     if(MatchedStyleName.length){
-      newName =  MatchedStyleName[0].name()
-     }
+     Object.keys( LocalTextStyles).forEach(item=>{
+      if(String(item)===String(sharedID)){
+       newName = LocalTextStyles[item].name 
+      }
+    }); 
 
      Object.keys(LibraryStyles).forEach(item=>{
       if(String(item)===String(sharedID)){
        newName = LibraryStyles[item].name 
       }
-    });
-    
+    }); 
          if(action==="prepend") {
           layer.setName(newName +   ' - ' + currentName); 
         } else if (action==="append") {
