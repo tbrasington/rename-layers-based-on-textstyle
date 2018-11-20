@@ -1,4 +1,4 @@
-![logo](https://github.com/tbrasington/text-to-styles/raw/master/assets/icon.png)
+![logo](https://github.com/tbrasington/rename-layers-based-on-textstyle/raw/master/assets/icon.png)
 
 # rename-layers-based-on-textstyle
 
@@ -29,19 +29,19 @@ Either install via Sketchpacks, Sketch Runner or...
 
 ### Append
 
-![logo](https://github.com/tbrasington/text-to-styles/raw/master/artwork/append.gif)
+![logo](https://github.com/tbrasington/rename-layers-based-on-textstyle/raw/master/artwork/append.gif)
 
 Takes the Text Syle name and adds it to the end of the the Layer name with a hypen
 
 ### Prepend
 
-![logo](https://github.com/tbrasington/text-to-styles/raw/master/artwork/prepend.gif)
+![logo](https://github.com/tbrasington/rename-layers-based-on-textstyle/raw/master/artwork/prepend.gif)
 
 Takes the Text Syle name and adds it to the front of the the Layer name with a hypen
 
 ### Replace
 
-![logo](https://github.com/tbrasington/text-to-styles/raw/master/artwork/replace.gif)
+![logo](https://github.com/tbrasington/rename-layers-based-on-textstyle/raw/master/artwork/replace.gif)
 
 Takes the Text Syle name and replaces the entire layer name with the Text Style
 
