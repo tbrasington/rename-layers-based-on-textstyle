@@ -11,7 +11,7 @@ It will go through your local document text styles first, then look for any text
 
 ## Why?
 
-When developers are picking through tools like InVision and Zeplin they can't easily sync up the style reference to your design system. They only get the attributes of the font. This tool means that they can easily see form the generated class names or layer what the style is.
+When developers are picking through tools like InVision and Zeplin they can't easily sync up the style reference to your design system. They only get the attributes of the font like size or letter spacing. This tool allows them to see the style name and reference it with their codebase.
 
 ## Installation
 
