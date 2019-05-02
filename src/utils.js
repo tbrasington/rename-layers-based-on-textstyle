@@ -1,7 +1,6 @@
 export function mapLocalStyles(styles) {
   let LocalTextStyles = {} //doc.documentData().layerTextStyles().sharedStyles() ;
   styles.forEach(element => {
-    
    LocalTextStyles[element.objectID()] = { name : element.name(),  style: element } 
 
 });
@@ -14,6 +13,8 @@ export function getLibraryStyles(){
  AppController.sharedInstance().librariesController().userLibraries().forEach(library=>{
    if(library.document()!==null) {
      library.document().documentData().layerTextStyles().sharedStyles().forEach(item=>{
+       
+//console.log(item.objectID())
        LibraryStyles[item.objectID()]= { name : item.name() } 
      })
    }
@@ -25,6 +26,7 @@ let DocumentStylesFromLibrary = {}
  context.document.documentData().foreignTextStyles().forEach(style => {
     //log('local id '  + style.localShareID()) // this is what the text style in an artboard will report
     //log('remote id '  +style.remoteShareID()) // this syncs to whats in the library
+   // console.log(style.localShareID()  + ' ' + style.remoteShareID())
     DocumentStylesFromLibrary[style.localShareID()] = {
       localID  : style.localShareID(),
       libraryID : style.remoteShareID(),
@@ -53,26 +55,27 @@ function recursiveRename(layers,LocalTextStyles,LibraryStyles, action) {
     let sharedID = layer.sharedStyleID()
     
     // local document first
-     let newName='';
+     let newName=''; 
      Object.keys( LocalTextStyles).forEach(item=>{
-      if(String(item)===String(sharedID)){
+       if(String(item)===String(sharedID)){
        newName = LocalTextStyles[item].name 
       }
     }); 
 
      Object.keys(LibraryStyles).forEach(item=>{
       if(String(item)===String(sharedID)){
+    
        newName = LibraryStyles[item].name 
       }
     }); 
 
     if(typeof(newName) === 'object'){
          if(action==="prepend") {
-          layer.setName(newName +   ' - ' + currentName); 
+          layer.name = (newName +   ' - ' + currentName); 
         } else if (action==="append") {
-          layer.setName(currentName + ' - ' + newName ); 
+          layer.name =(currentName + ' - ' + newName ); 
         } else if (action==="replace") { 
-          layer.setName(newName);
+          layer.name = (newName);
       }
     }
    

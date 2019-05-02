@@ -7,6 +7,5 @@ export default function(context) {
 
   const LocalTextStyles = mapLocalStyles(doc.documentData().layerTextStyles().sharedStyles());
   const DocumentStylesFromLibrary= getLibraryStyles();
-
   rename(pages, LocalTextStyles, DocumentStylesFromLibrary, "replace");
 }

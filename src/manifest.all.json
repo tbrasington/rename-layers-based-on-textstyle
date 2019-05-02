@@ -3,7 +3,16 @@
     "bundleVersion": 1,
     "icon": "icon.png",
     "commands": [
-     
+      {
+        "name": "Append",
+        "identifier": "append-identifier",
+        "script": "./append.js"
+      }, 
+      {
+        "name": "Prepend",
+        "identifier": "prepend-identifier",
+        "script": "./prepend.js"
+      }, 
       {
         "name": "Replace",
         "identifier": "replace-identifier",
@@ -12,7 +21,9 @@
     ],
     "menu": {
       "title": "Rename text layers from Text Style",
-      "items": [ 
+      "items": [
+        "append-identifier",
+        "prepend-identifier",
         "replace-identifier"
       ]
     }
