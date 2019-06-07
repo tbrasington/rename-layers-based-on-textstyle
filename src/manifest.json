@@ -2,6 +2,7 @@
     "compatibleVersion": 3,
     "bundleVersion": 1,
     "icon": "icon.png",
+    "name": "Rename layers based on Text Style",
     "commands": [
      
       {
