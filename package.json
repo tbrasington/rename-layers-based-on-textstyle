@@ -14,8 +14,7 @@
     "assets": [
       "assets/**/*"
     ],
-    "identifier": "rename-layers-based-on-textstyle.plugin",
-    "appcast": "https://raw.githubusercontent.com/tbrasington/rename-layers-based-on-textstyle/master/.appcast.xml"
+    "identifier": "rename-layers-based-on-textstyle.plugin"
   },
   "scripts": {
     "build": "skpm-build",
@@ -26,5 +25,5 @@
   "devDependencies": {
     "@skpm/builder": "^0.6.0"
   },
-  "author": "Thomas Brasington <mail@tbrasington.com>"
+  "author": "Thomas Brasington <tbrasington@gmail.com>"
 }
