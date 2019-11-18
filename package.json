@@ -3,7 +3,7 @@
   "description": "Renames text layers in the current page based on their text style name",
   "repository": "https://github.com/tbrasington/rename-layers-based-on-textstyle.git",
   "license": "mit",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "engines": {
     "sketch": ">=52.0"
   },
